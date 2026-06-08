@@ -405,6 +405,57 @@ function drawMiniChart(canvas, chartData){
     showUP(currentIndex);
   });
 })();
+
+// === Auto-scroll for fans grid, ranking list, and video grid ===
+(function(){
+  function autoScroll(container, direction) {
+    // direction: 'horizontal' or 'vertical'
+    var scrollProp = direction === 'horizontal' ? 'scrollLeft' : 'scrollTop';
+    var sizeProp = direction === 'horizontal' ? 'scrollWidth' : 'scrollHeight';
+    var clientProp = direction === 'horizontal' ? 'clientWidth' : 'clientHeight';
+    var maxScroll = container[sizeProp] - container[clientProp];
+
+    // If content fits, no scrolling needed
+    if (maxScroll <= 0) return;
+
+    // Auto-scroll: advance by 2px per tick, loop back when at bottom/end
+    var paused = false;
+    setInterval(function() {
+      // Only auto-scroll if user isn't actively hovering and not in pause state
+      if (container.dataset.paused === 'true' || paused) return;
+
+      var current = container[scrollProp];
+      var step = direction === 'horizontal' ? 2 : 1;
+      var next = current + step;
+
+      if (next >= maxScroll) {
+        // Jump back to start, then pause 3 seconds
+        container[scrollProp] = 0;
+        paused = true;
+        setTimeout(function() { paused = false; }, 3000);
+      } else {
+        container[scrollProp] = next;
+      }
+    }, 50);
+  }
+
+  // Pause on hover
+  function addHoverPause(el) {
+    el.addEventListener('mouseenter', function() { el.dataset.paused = 'true'; });
+    el.addEventListener('mouseleave', function() { el.dataset.paused = 'false'; });
+    // Also pause on touch
+    el.addEventListener('touchstart', function() { el.dataset.paused = 'true'; });
+    el.addEventListener('touchend', function() { el.dataset.paused = 'false'; });
+  }
+
+  var fansGrid = document.getElementById('fansGrid');
+  var rankingList = document.getElementById('rankingList');
+  var videoWrap = document.querySelector('.video-grid-wrap');
+
+  if (fansGrid) { addHoverPause(fansGrid); autoScroll(fansGrid, 'horizontal'); }
+  if (rankingList) { addHoverPause(rankingList); autoScroll(rankingList, 'vertical'); }
+  if (videoWrap) { addHoverPause(videoWrap); autoScroll(videoWrap, 'vertical'); }
+})();
 </script>
 </body>
 </html>
