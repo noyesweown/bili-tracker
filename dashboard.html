@@ -253,7 +253,7 @@ document.getElementById('currentDate').textContent='更新于 '+DATA.date;
     d.className='v-card';
     var fullDate=(v.pub_date||'').slice(0,10);
     var thumbHTML = v.cover
-      ? '<img src="'+v.cover+'" alt="" loading="lazy">'
+      ? '<img src="'+v.cover+'" alt="" loading="lazy" referrerpolicy="no-referrer">'
       : '<span class="v-thumb-fallback">▶</span>';
     d.innerHTML='<div class="v-thumb">'+thumbHTML+'<span class="v-date">'+fullDate+'</span></div><div class="v-info"><div class="v-name">'+v.title+'</div><div class="v-stats"><span class="up-tag">'+v.up+'</span><span>▶'+fmtNum(v.play_count)+'</span><span>❤'+fmtNum(v.like)+'</span><span>⭐'+fmtNum(v.favorite)+'</span><span>💬'+fmtNum(v.comment)+'</span></div></div>';
     g.appendChild(d)
