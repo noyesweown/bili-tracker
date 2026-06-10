@@ -220,8 +220,8 @@ function fmtNum(n){
 }
 function fmtChange(n){
   n=parseInt(n)||0;
-  if(n>0)return'<span style="color:#5a9a5a">▲'+n.toLocaleString()+'</span>';
-  if(n<0)return'<span style="color:#e88070">▼'+Math.abs(n).toLocaleString()+'</span>';
+  if(n>0)return'<span style="color:#e88070">▲'+n.toLocaleString()+'</span>';
+  if(n<0)return'<span style="color:#5a9a5a">▼'+Math.abs(n).toLocaleString()+'</span>';
   return'<span style="color:#d4c8b8">─0</span>'
 }
 
