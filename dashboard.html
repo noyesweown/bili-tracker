@@ -302,23 +302,27 @@ document.getElementById('currentDate').textContent='更新于 '+DATA.date;
   })
 })();
 
-// === Auto-scroll ===
+// === Auto-scroll (seamless loop) ===
 (function(){
   var videoWrap = document.querySelector('.video-grid-wrap');
-  if (!videoWrap) return;
+  var videoGrid = document.getElementById('videoGrid');
+  if (!videoWrap || !videoGrid) return;
+
+  // Clone all video cards for seamless looping
+  var cards = videoGrid.innerHTML;
+  videoGrid.innerHTML = cards + cards;
+
   function autoScroll(container) {
+    var halfHeight = container.scrollHeight / 2;
     var maxScroll = container.scrollHeight - container.clientHeight;
     if (maxScroll <= 0) return;
-    var paused = false;
+
     setInterval(function() {
-      if (container.dataset.paused === 'true' || paused) return;
-      var next = container.scrollTop + 1;
-      if (next >= maxScroll) {
-        container.scrollTop = 0;
-        paused = true;
-        setTimeout(function() { paused = false; }, 3000);
-      } else {
-        container.scrollTop = next;
+      if (container.dataset.paused === 'true') return;
+      container.scrollTop += 1;
+      // When scrolled past the first half (original content), silently jump back
+      if (container.scrollTop >= halfHeight) {
+        container.scrollTop = container.scrollTop - halfHeight;
       }
     }, 50);
   }
