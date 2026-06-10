@@ -53,7 +53,9 @@ body .wc-spot3{
   66%{transform:translate(-30px,20px) scale(0.88);opacity:0.75}
 }
 
-.header{display:flex;align-items:center;justify-content:flex-end;margin-bottom:6px;flex-shrink:0;position:relative;z-index:1;gap:8px}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-shrink:0;position:relative;z-index:1}
+.header-right{display:flex;align-items:center;gap:8px}
+.logo-img{width:32px;height:32px;border-radius:8px;object-fit:cover;border:1.5px solid #f0e4d4;background:#fffdf8}
 .date{font-size:11px;color:#b8a898}
 .fs-btn{
   background:#fffdf8;border:1.5px solid #f0e4d4;border-radius:8px;
@@ -94,14 +96,14 @@ body .wc-spot3{
 .video-section{flex:1;display:flex;flex-direction:column;min-height:0;position:relative;z-index:1}
 .section-label{font-size:12px;color:#8a7060;margin-bottom:6px;flex-shrink:0;font-weight:700;letter-spacing:0.5px}
 .section-label span{color:#d47a3a}
-.video-grid-wrap{flex:1;overflow-y:auto;padding-right:4px}
-.video-grid-wrap::-webkit-scrollbar{width:3px}
-.video-grid-wrap::-webkit-scrollbar-thumb{background:rgba(255,182,142,0.35);border-radius:2px}
+.video-grid-wrap{flex:1;overflow-y:auto;scrollbar-width:none}
+.video-grid-wrap::-webkit-scrollbar{display:none}
 .video-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:10px;
-  align-content:start;
+  align-content:center;
+  justify-items:center;
 }
 
 /* Video card */
@@ -188,9 +190,12 @@ body .wc-spot3{
 
 <div class="wc-spot3"></div>
 <div class="header">
-  <div class="date" id="currentDate"></div>
-  <div class="fs-btn" id="fsBtn" title="全屏">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+  <img class="logo-img" src="logo.jpeg" alt="logo">
+  <div class="header-right">
+    <div class="date" id="currentDate"></div>
+    <div class="fs-btn" id="fsBtn" title="全屏">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+    </div>
   </div>
 </div>
 
